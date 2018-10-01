@@ -41,7 +41,11 @@ def get_plants():
     :return: Plants of farm design
 
     """
-    response = get_resource('/api/points')
+    headers = {
+        'Authorization': 'bearer {}'.format(os.environ['API_TOKEN']),
+        'content-type': "application/json"
+    }
+    response = requests.get('https://my.farmbot.io/api/points', headers=headers)
 
     if response.status_code != 200:
         raise Exception('Unable to get points --> {0}'.format(response.text))

@@ -1,0 +1,24 @@
+{
+ "package": "Watering tool",
+ "language": "python",
+ "author": "Arthur Verdier.",
+ "description": "Execute circle movement around each plants",
+ "version": "1.0.0",
+ "min_os_version_major": 3,
+ "url": "https://raw.githubusercontent.com/averdier/farmware_watering_farmdesign/master/manifest.json",
+ "zip": "https://github.com/averdier/farmware_watering_farmdesign/archive/master.zip",
+ "executable": "python",
+ "args": ["farmware_watering_farmdesign-master/main.py"],
+  "config": [
+    {
+      "name": "speed",
+      "label": "Speed",
+      "value": 800
+    },
+    {
+      "name": "steps",
+      "label": "Steps",
+      "value": 8
+    }
+  ]
+}

@@ -41,7 +41,7 @@ def get_plants():
     :return: Plants of farm design
 
     """
-    response = get_resource('/points')
+    response = get_resource('/api/points')
 
     if response.status_code != 200:
         raise Exception('Unable to get points --> {0}'.format(response.text))

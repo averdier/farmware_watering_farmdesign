@@ -19,6 +19,11 @@
       "name": "steps",
       "label": "Steps",
       "value": 8
+    },
+    {
+      "name": "tolerance",
+      "label": "Tolerance",
+      "value": 5
     }
   ]
 }

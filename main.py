@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-from utils import log, get_plants
-from farmbot import FarmBot
-from geometry import Circle, Point3D
+from utils.farmbot import FarmBot
+from utils.geometry import Circle, Point3D
+from utils.api import log, get_plants
 
 
 def get_parameters():
@@ -16,23 +16,27 @@ def get_parameters():
     try:
         sp = int(os.environ.get('watering_tool_speed', '800'))
         st = int(os.environ.get('watering_tool_steps', '8'))
+        tl = int(os.environ.get('watering_tool_tolerance', '8'))
+
     except ValueError:
         raise Exception('Wrong parameters format')
     if sp < 1:
         raise Exception('Speed ( > 1 )')
     if st < 2:
         raise Exception('Steps ( > 2 )')
+    if tl < 1:
+        raise Exception('Tolerance ( > 1)')
 
-    return sp, st
+    return sp, st, tl
 
 
 if __name__ == '__main__':
     log('Started', 'debug')
 
     try:
-        speed, steps = get_parameters()
+        speed, steps, tolerance = get_parameters()
 
-        log('Speed: {0}, Steps: {1}'.format(speed, steps), 'debug')
+        log('Speed: {0}, Steps: {1}, Tolerance {2}'.format(speed, steps, tolerance), 'debug')
 
         path = []
         for plant in get_plants():
@@ -46,7 +50,7 @@ if __name__ == '__main__':
         log('Movements to do: {0}'.format(len(path)), 'debug')
 
         for position in path:
-            farmbot.move(position, speed)
+            farmbot.move(position, speed, tolerance, 10)
 
     except Exception as ex:
         log('Error --> {0}'.format(ex), 'error')
